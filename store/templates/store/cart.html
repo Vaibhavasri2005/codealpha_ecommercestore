@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+        }
+
+        .cart-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 600px;
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        .cart-item h3 {
+            color: #0077cc;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+        }
+
+        .total {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        .checkout-btn {
+            display: block;
+            text-align: center;
+            margin: 30px auto 10px;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 18px;
+            width: fit-content;
+        }
+
+        .checkout-btn:hover {
+            background-color: #45a049;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .back-home:hover {
+            background-color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛒 Your Shopping Cart</h1>
+
+    {% if cart_items %}
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <h3>{{ item.product.name }}</h3>
+                <p>Quantity: {{ item.quantity }}</p>
+                <p>Price: ₹{{ item.product.price }}</p>
+                <p>Total: ₹{{ item.item_total }}</p>
+            </div>
+        {% endfor %}
+
+        <div class="total">Grand Total: ₹{{ total }}</div>
+
+        <a href="{% url 'checkout' %}" class="checkout-btn">✅ Proceed to Checkout</a>
+    {% else %}
+        <p style="text-align: center;">Your cart is empty 😢</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="back-home">← Continue Shopping</a>
+</body>
+</html>

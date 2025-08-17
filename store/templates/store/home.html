@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Store</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            padding: 20px;
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: #ff4081;
+            padding: 10px 20px;
+            color: white;
+            text-align: right;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .navbar span {
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+
+        .cart-button {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cart-button a {
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cart-button a:hover {
+            background-color: #005fa3;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            width: 240px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .product h3 {
+            color: #ff4081;
+            font-size: 20px;
+        }
+
+        .product p {
+            color: #333;
+        }
+
+        .product a.button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #ff4081;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .product a.button:hover {
+            background-color: #e91e63;
+        }
+
+        /* Success messages */
+        .messages {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .messages li {
+            list-style: none;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ Navbar -->
+    <div class="navbar">
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}!</span>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </div>
+
+    <h1>🛍️ Explore Trendy Products!</h1>
+
+    <div class="cart-button">
+        <a href="{% url 'cart' %}">🛒 View Cart</a>
+    </div>
+
+    <!-- Show success messages -->
+    {% if messages %}
+    <div class="messages">
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="products">
+        {% for product in products %}
+            <div class="product">
+                <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                </a>
+                <p>₹{{ product.price }}</p>
+                <p>{{ product.description|truncatechars:50 }}</p>
+                <a href="{% url 'add_to_cart' product.id %}" class="button">Add to Cart 🛒</a>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

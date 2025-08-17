@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }} - Detail</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Segoe UI', sans-serif;
+            padding: 40px;
+            color: #333;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #ff4081;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #3f51b5;
+            font-weight: bold;
+        }
+
+        .description {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #ff4081;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            background-color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ product.name }}</h1>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p class="price">₹{{ product.price }}</p>
+        <p class="description">{{ product.description }}</p>
+        <a href="/">← Back to Home</a>
+    </div>
+</body>
+</html>

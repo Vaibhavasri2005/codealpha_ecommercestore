@@ -29,3 +29,19 @@ Users can browse products, add them to a cart, register/login, and place orders.
    ```bash
    git clone https://github.com/Vaibhavasri2005/codealpha_ecommercestore.git
    cd codealpha_ecommercestore
+# 🛍️ CodeAlpha E-commerce Store
+
+A simple e-commerce website built with Django.
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
+
+### 🛍 Product Listing
+![Product Listing](screenshots/products.png)
+
+### 🛒 Cart Page
+![Cart Page](screenshots/cart.png)
